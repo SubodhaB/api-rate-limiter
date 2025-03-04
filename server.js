@@ -1,31 +1,13 @@
-require("dotenv").config();
 const express = require("express");
-const rateLimit = require("express-rate-limit");
-const Redis = require("ioredis");
-
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-// Connect to Redis
-const redisClient = new Redis(process.env.REDIS_URL);
-
-// Configure Rate Limiting
-const limiter = rateLimit({
-  windowMs: process.env.RATE_LIMIT_WINDOW * 1000, // Convert seconds to milliseconds
-  max: process.env.RATE_LIMIT_MAX,
-  handler: (req, res) => {
-    res.status(429).json({ error: "Too many requests, please try again later." });
-  },
-});
-
-// Apply rate limiting to all routes
-app.use(limiter);
-
+// Define a simple route
 app.get("/", (req, res) => {
-  res.send("Welcome to the API Rate Limiter Service!");
+    res.send("Hello, world!");
 });
 
-// Start server
+// Use Railway’s assigned PORT or default to 3000
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
