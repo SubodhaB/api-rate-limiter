@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 
-// Trust Railway's proxy to handle HTTPS correctly
+// Trust Railway's proxy to handle HTTPS correctl
 app.set("trust proxy", true);
 
 // Define a simple route
